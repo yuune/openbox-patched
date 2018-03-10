@@ -5,7 +5,19 @@ post_install() {
     echo "==> The patch also takes an argument for menu corners."
     echo "==> \'<cornerRadius menu=\"yes\">8</cornerRadius>\'"
     echo
+    echo "==> If you are obconf user, you need to rebuild the obconf packages from sources :
+    echo "==> $ yaourt -Sb obconf"
+    echo "==> or lxappearance-obconf :"
+    echo "==> $ yaourt -Sb lxappearance-obconf"
+    echo
     echo "==> Report bugs or feature requests here:"
     echo "==> https://github.com/dylanaraps/openbox-patched"
     echo
+}
+
+post_remove() {
+    echo "==> If you are obconf user, you need to reinstall obconf from the official repository :"
+    echo "==> $ sudo pacman -S obconf"
+    echo "==> or lxappearance-obconf :"
+    echo "==> $ sudo pacman -S lxappearance-obconf"
 }

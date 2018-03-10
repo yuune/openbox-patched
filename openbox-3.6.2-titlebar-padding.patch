@@ -1,0 +1,39 @@
+diff -ur a/obrender/theme.c b/obrender/theme.c
+--- a/obrender/theme.c	2014-11-06 10:22:49.000000000 +0700
++++ b/obrender/theme.c	2018-03-10 19:40:03.312568328 +0700
+@@ -271,6 +271,8 @@
+     READ_INT("menu.separator.padding.height", theme->menu_sep_paddingy, 0, 100, 3);
+     READ_INT("window.client.padding.width", theme->cbwidthx, 0, 100, theme->paddingx);
+     READ_INT("window.client.padding.height", theme->cbwidthy, 0, 100, theme->cbwidthx);
++    READ_INT("window.title.left.padding.width", theme->paddingtl, 0, 100, theme->paddingx);
++    READ_INT("window.title.right.padding.width", theme->paddingtr, 0, 100, theme->paddingx);
+ 
+     /* load colors */
+     READ_COLOR_("window.active.border.color",
+diff -ur a/obrender/theme.h b/obrender/theme.h
+--- a/obrender/theme.h	2014-11-06 10:22:49.000000000 +0700
++++ b/obrender/theme.h	2018-03-10 18:44:06.918209281 +0700
+@@ -40,6 +40,8 @@
+     /* style settings - geometry */
+     gint paddingx;
+     gint paddingy;
++    gint paddingtl;
++    gint paddingtr;
+     gint handle_height;
+     gint fbwidth; /*!< frame border width */
+     gint mbwidth; /*!< menu border width */
+diff -ur a/openbox/frame.c b/openbox/frame.c
+--- a/openbox/frame.c	2014-11-05 22:19:42.000000000 +0700
++++ b/openbox/frame.c	2018-03-10 19:08:04.437769309 +0700
+@@ -1184,9 +1184,9 @@
+ 
+     const gint bwidth = ob_rr_theme->button_size + ob_rr_theme->paddingx + 1;
+     /* position of the leftmost button */
+-    const gint left = ob_rr_theme->paddingx + 1;
++    const gint left = ob_rr_theme->paddingtl + 1;
+     /* position of the rightmost button */
+-    const gint right = self->width;
++    const gint right = self->width - (ob_rr_theme->paddingtr + 1);
+ 
+     /* turn them all off */
+     self->icon_on = self->desk_on = self->shade_on = self->iconify_on =
